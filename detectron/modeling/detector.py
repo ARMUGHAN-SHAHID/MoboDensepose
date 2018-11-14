@@ -454,7 +454,7 @@ class DetectionModelHelper(cnn.CNNModelHelper):
         blob_out_dw=self.Relu(blob_out_dw, blob_out_dw)
          #1x1 conv
 
-         conv_blob = self.Conv(
+        conv_blob = self.Conv(
             blob_out_dw,
             prefix,
             dim_in,
@@ -475,7 +475,7 @@ class DetectionModelHelper(cnn.CNNModelHelper):
         return blob_out
 
         #changed
-        
+
     def ConvGN(  # args in the same order of Conv()
         self, blob_in, prefix, dim_in, dim_out, kernel, stride, pad,
         group_gn,  # num of groups in gn
