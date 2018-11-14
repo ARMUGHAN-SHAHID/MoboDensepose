@@ -433,7 +433,7 @@ class DetectionModelHelper(cnn.CNNModelHelper):
             kernel=kernel,
             stride=stride,
             pad=pad,
-            group=dim_in
+            group=1#dim_in
         )
         return blob_out
 
