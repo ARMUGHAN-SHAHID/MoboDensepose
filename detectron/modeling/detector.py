@@ -410,7 +410,6 @@ class DetectionModelHelper(cnn.CNNModelHelper):
         suffix="_dw"
     ):
         blob_out = self.GroupConv(
-            self,
             blob_in,
             prefix+suffix,
             dim_in,
