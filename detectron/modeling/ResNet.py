@@ -84,6 +84,9 @@ def add_ResNet_convX_body(model, block_counts, freeze_at=2):
     """Add a ResNet body from input data up through the res5 (aka conv5) stage.
     The final res5/conv5 stage may be optionally excluded (hence convX, where
     X = 4 or 5)."""
+
+    freeze_at=0 if cfg.RESNETS.USE_CONV_DS else freeze_at #changed
+
     assert freeze_at in [0, 2, 3, 4, 5]
 
     # add the stem (by default, conv1 and pool1 with bn; can support gn)
@@ -294,18 +297,34 @@ def bottleneck_transformation(
     cur = model.Relu(cur, cur)
 
     # conv 3x3 -> BN -> ReLU
-    cur = model.ConvAffine(
-        cur,
-        prefix + '_branch2b',
-        dim_inner,
-        dim_inner,
-        kernel=3,
-        stride=str3x3,
-        pad=1 * dilation,
-        dilation=dilation,
-        group=group,
-        inplace=True
-    )
+   
+    #changed
+    if not cfg.RESNETS.USE_CONV_DS:
+        cur = model.ConvAffine(
+            cur,
+            prefix + '_branch2b',
+            dim_inner,
+            dim_inner,
+            kernel=3,
+            stride=str3x3,
+            pad=1 * dilation,
+            dilation=dilation,
+            group=group,
+            inplace=True
+        )
+    else:
+        cur=model.ConvDS_Affine(
+            cur,
+            prefix + '_branch2b',
+            dim_inner,
+            dim_inner,
+            kernel=3,
+            stride=str3x3,
+            pad=1 * dilation,
+            group=1, 
+            dilation=1
+        )
+    #changed
     cur = model.Relu(cur, cur)
 
     # conv 1x1 -> BN (no ReLU)

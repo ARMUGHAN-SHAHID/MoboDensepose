@@ -403,6 +403,79 @@ class DetectionModelHelper(cnn.CNNModelHelper):
         )
         return blob_out
 
+      #changed
+    def ConvDW(self, blob_in, prefix, dim_in,kernel, stride, pad,
+        weight_init=None,
+        bias_init=None,
+        suffix="_dw"
+    ):
+        blob_out = self.GroupConv(
+            self,
+            blob_in,
+            prefix+suffix,
+            dim_in,
+            dim_in,
+            kernel=kernel,            
+            stride=stride,
+            pad=pad,
+            weight_init=weight_init,
+            bias_init=bias_init,
+            group=dim_in
+        )
+        return blob_out
+
+
+        #changed
+
+    def ConvDS_Affine(self, blob_in, prefix, dim_in, dim_out, kernel, stride, pad,
+        group=1, dilation=1,
+        weight_init=None,
+        bias_init=None,
+        suffix='_ds',
+        inplace=False
+
+        ):
+        prefix=prefix+suffix
+        #3x3 dw conv
+        dw_conv_blob=self.ConvDW(
+            blob_in,
+            prefix,
+            dim_in,
+            kernel=kernel,
+            stride=stride,
+            pad=pad,
+            weight_init=weight_init,
+            bias_init=bias_init
+        )
+
+        blob_out_dw = self.AffineChannel(
+            dw_conv_blob, prefix, dim=dim_in, inplace=inplace
+        )
+        blob_out_dw=self.Relu(blob_out_dw, blob_out_dw)
+         #1x1 conv
+
+         conv_blob = self.Conv(
+            blob_out_dw,
+            prefix,
+            dim_in,
+            dim_out,
+            kernel=1,
+            stride=1,
+            pad=0,
+            group=group,
+            dilation=dilation,
+            weight_init=weight_init,
+            bias_init=bias_init,
+            no_bias=1
+        )
+
+        blob_out = self.AffineChannel(
+            conv_blob, prefix, dim=dim_out, inplace=inplace
+        )
+        return blob_out
+
+        #changed
+        
     def ConvGN(  # args in the same order of Conv()
         self, blob_in, prefix, dim_in, dim_out, kernel, stride, pad,
         group_gn,  # num of groups in gn

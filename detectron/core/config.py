@@ -933,7 +933,7 @@ __C.RESNETS.SHORTCUT_FUNC = b'basic_bn_shortcut'
 # Apply dilation in stage "res5"
 __C.RESNETS.RES5_DILATION = 1
 
-
+__C.RESNETS.USE_CONV_DS = False #changed
 # ---------------------------------------------------------------------------- #
 # GroupNorm options
 # ---------------------------------------------------------------------------- #
