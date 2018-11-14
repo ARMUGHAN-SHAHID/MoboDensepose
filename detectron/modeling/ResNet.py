@@ -85,7 +85,7 @@ def add_ResNet_convX_body(model, block_counts, freeze_at=2):
     The final res5/conv5 stage may be optionally excluded (hence convX, where
     X = 4 or 5)."""
 
-    freeze_at=0 if cfg.RESNETS.USE_CONV_DS else freeze_at #changed
+    # freeze_at=0 if cfg.RESNETS.USE_CONV_DS else freeze_at #changed
 
     assert freeze_at in [0, 2, 3, 4, 5]
 
