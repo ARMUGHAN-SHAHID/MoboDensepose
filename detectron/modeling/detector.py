@@ -429,11 +429,11 @@ class DetectionModelHelper(cnn.CNNModelHelper):
             prefix+suffix,
             dim_in,
             dim_in,
-            weight_init=("MSRAFill", {}),
+            weight_init=weight_init,
             kernel=kernel,
             stride=stride,
             pad=pad,
-            group=1#dim_in
+            group=dim_in
         )
         return blob_out
 
