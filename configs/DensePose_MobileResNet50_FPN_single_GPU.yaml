@@ -33,7 +33,7 @@ FPN:
   MULTILEVEL_RPN: True
 #changed
 RESNETS:
-  USE_CONV_DS: False
+  USE_CONV_DS: True
 FAST_RCNN:
   ROI_BOX_HEAD: fast_rcnn_heads.add_roi_2mlp_head
   ROI_XFORM_METHOD: RoIAlign
