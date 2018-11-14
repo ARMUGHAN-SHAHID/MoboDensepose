@@ -28,6 +28,7 @@ from detectron.ops.generate_proposal_labels import GenerateProposalLabelsOp
 from detectron.ops.generate_proposals import GenerateProposalsOp
 import detectron.roi_data.fast_rcnn as fast_rcnn_roi_data
 import detectron.utils.c2 as c2_utils
+from caffe2.python import brew
 
 logger = logging.getLogger(__name__)
 
@@ -409,16 +410,29 @@ class DetectionModelHelper(cnn.CNNModelHelper):
         bias_init=None,
         suffix="_dw"
     ):
-        blob_out = self.GroupConv(
+        # blob_out = self.GroupConv(
+        #     blob_in,
+        #     prefix+suffix,
+        #     dim_in,
+        #     dim_in,
+        #     kernel=kernel,            
+        #     stride=stride,
+        #     pad=pad,
+        #     weight_init=weight_init,
+        #     bias_init=bias_init,
+        #     group=dim_in
+        # )
+
+        blob_out = brew.group_conv(
+            self,
             blob_in,
             prefix+suffix,
             dim_in,
             dim_in,
-            kernel=kernel,            
+            weight_init=("MSRAFill", {}),
+            kernel=kernel,
             stride=stride,
             pad=pad,
-            weight_init=weight_init,
-            bias_init=bias_init,
             group=dim_in
         )
         return blob_out
@@ -455,7 +469,7 @@ class DetectionModelHelper(cnn.CNNModelHelper):
 
         conv_blob = self.Conv(
             blob_out_dw,
-            prefix,
+            prefix+"_conv",
             dim_in,
             dim_out,
             kernel=1,
@@ -468,10 +482,10 @@ class DetectionModelHelper(cnn.CNNModelHelper):
             no_bias=1
         )
 
-        blob_out = self.AffineChannel(
-            conv_blob, prefix, dim=dim_out, inplace=inplace
+        conv_blob_out = self.AffineChannel(
+            conv_blob, prefix+"_bn", dim=dim_out, inplace=inplace
         )
-        return blob_out
+        return conv_blob_out
 
         #changed
 

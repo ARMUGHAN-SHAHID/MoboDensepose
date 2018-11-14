@@ -312,6 +312,9 @@ def bottleneck_transformation(
             group=group,
             inplace=True
         )
+
+       
+
     else:
         cur=model.ConvDS_Affine(
             cur,
@@ -321,8 +324,9 @@ def bottleneck_transformation(
             kernel=3,
             stride=str3x3,
             pad=1 * dilation,
-            group=1, 
-            dilation=1
+            group=group, 
+            dilation=dilation,
+            inplace=True
         )
     #changed
     cur = model.Relu(cur, cur)
