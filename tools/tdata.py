@@ -22,6 +22,7 @@ from detectron.core.config import merge_cfg_from_list
 # import detectron.utils.train
 
 import detectron.roi_data.minibatch as roi_data_minibatch
+from detectron.core.config import get_output_dir
 
 
 def parse_args():
