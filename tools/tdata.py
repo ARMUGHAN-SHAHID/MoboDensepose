@@ -23,6 +23,7 @@ from detectron.core.config import merge_cfg_from_list
 
 import detectron.roi_data.minibatch as roi_data_minibatch
 from detectron.core.config import get_output_dir
+from detectron.datasets.roidb import combined_roidb_for_training
 
 
 def parse_args():
