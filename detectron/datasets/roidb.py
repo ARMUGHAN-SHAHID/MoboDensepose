@@ -151,7 +151,7 @@ def compute_bbox_regression_targets(entry):
         return targets
 
     # Indices of examples for which we try to make predictions
-    ex_inds = np.where(overlaps >= cfg.TRAIN.BBOX_THRESH)[0]
+    ex_inds = np.where(overlaps >= cfg.TRAIN.BBOX_THRESH)[0]#example included if overlap of a box with a class is greater than some thresh
 
     # Get IoU overlap between each ex ROI and gt ROI
     ex_gt_overlaps = box_utils.bbox_overlaps(
@@ -162,7 +162,7 @@ def compute_bbox_regression_targets(entry):
     # this will be the ex ROI's gt target
     gt_assignment = ex_gt_overlaps.argmax(axis=1)
     gt_rois = rois[gt_inds[gt_assignment], :]
-    ex_rois = rois[ex_inds, :]
+    ex_rois = rois[ex_inds, :]      
     # Use class "1" for all boxes if using class_agnostic_bbox_reg
     targets[ex_inds, 0] = (
         1 if cfg.MODEL.CLS_AGNOSTIC_BBOX_REG else labels[ex_inds])
