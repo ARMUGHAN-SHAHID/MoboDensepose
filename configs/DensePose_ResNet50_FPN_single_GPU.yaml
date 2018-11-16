@@ -65,7 +65,7 @@ TRAIN:
   MAX_SIZE: 1333
   IMS_PER_BATCH: 3
   BATCH_SIZE_PER_IM: 512
-  USE_FLIPPED: True
+  USE_FLIPPED: False
 TEST:
   DATASETS: ('dense_coco_2014_minival',)
   PROPOSAL_FILES: ('https://s3.amazonaws.com/densepose/DensePose-RPN-minival_fpn_resnet50.pkl',)
