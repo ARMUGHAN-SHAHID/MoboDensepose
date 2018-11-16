@@ -17,7 +17,7 @@ from detectron.core.config import cfg
 from detectron.core.config import merge_cfg_from_file
 from detectron.core.config import merge_cfg_from_list
 # from detectron.core.test_engine import run_inference
-# from detectron.utils.logging import setup_logging
+from detectron.utils.logging import setup_logging
 # import detectron.utils.c2 as c2_utils
 # import detectron.utils.train
 
@@ -67,12 +67,12 @@ def main():
     #     ['caffe2', '--caffe2_log_level=0', '--caffe2_gpu_memory_tracking=1']
     # )
     # Set up logging and load config options
-    # logger = setup_logging(__name__)
-    # logging.getLogger('detectron.roi_data.loader').setLevel(logging.INFO)
+    logger = setup_logging(__name__)
+    logging.getLogger('detectron.roi_data.loader').setLevel(logging.INFO)
     print ("1.   ==============>")
     args = parse_args()
-    # logger.info('Called with args:')
-    # logger.info(args)
+    logger.info('Called with args:')
+    logger.info(args)
     if args.cfg_file is not None:
         merge_cfg_from_file(args.cfg_file)
         print ("2.   ==============>")
