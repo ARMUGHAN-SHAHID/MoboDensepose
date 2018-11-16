@@ -67,11 +67,13 @@ def main():
     # Set up logging and load config options
     # logger = setup_logging(__name__)
     # logging.getLogger('detectron.roi_data.loader').setLevel(logging.INFO)
+    print ("1.   ==============>")
     args = parse_args()
     # logger.info('Called with args:')
     # logger.info(args)
     if args.cfg_file is not None:
         merge_cfg_from_file(args.cfg_file)
+        print ("2.   ==============>")
     if args.opts is not None:
         merge_cfg_from_list(args.opts)
     assert_and_infer_cfg()
