@@ -17,7 +17,7 @@ from detectron.core.config import cfg
 from detectron.core.config import merge_cfg_from_file
 from detectron.core.config import merge_cfg_from_list
 # from detectron.core.test_engine import run_inference
-# from detectron.utils.logging import setup_logging
+from detectron.utils.logging import setup_logging
 # import detectron.utils.c2 as c2_utils
 # import detectron.utils.train
 
