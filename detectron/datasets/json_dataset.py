@@ -408,21 +408,21 @@ def _merge_proposal_boxes_into_roidb(roidb, box_list):
         gt_inds = np.where(entry['gt_classes'] > 0)[0]
         if len(gt_inds) > 0:
             gt_boxes = entry['boxes'][gt_inds, :]
-            gt_classes = entry['gt_classes'][gt_inds]
+            gt_classes = entry['gt_classes'][gt_inds]#classes of each foreground obj in real dataset
             proposal_to_gt_overlaps = box_utils.bbox_overlaps(
                 boxes.astype(dtype=np.float32, copy=False),
                 gt_boxes.astype(dtype=np.float32, copy=False)
             )
             # Gt box that overlaps each input box the most
             # (ties are broken arbitrarily by class order)
-            argmaxes = proposal_to_gt_overlaps.argmax(axis=1)
+            argmaxes = proposal_to_gt_overlaps.argmax(axis=1)#index of gt froeground objs having max overlap with the proposal
             # Amount of that overlap
-            maxes = proposal_to_gt_overlaps.max(axis=1)
+            maxes = proposal_to_gt_overlaps.max(axis=1)#value of overlap fro gt froeground objs having max overlap with the proposal
             # Those boxes with non-zero overlap with gt boxes
             I = np.where(maxes > 0)[0]
             # Record max overlaps with the class of the appropriate gt box
-            gt_overlaps[I, gt_classes[argmaxes[I]]] = maxes[I]
-            box_to_gt_ind_map[I] = gt_inds[argmaxes[I]]
+            gt_overlaps[I, gt_classes[argmaxes[I]]] = maxes[I]#setting  the overlap fro each proposal fro the class of the ground truth box it has the max overlap with
+            box_to_gt_ind_map[I] = gt_inds[argmaxes[I]]#mapping the box to the ind of ground truth box with the most match
         entry['boxes'] = np.append(
             entry['boxes'],
             boxes.astype(entry['boxes'].dtype, copy=False),
