@@ -75,7 +75,9 @@ def main():
         merge_cfg_from_file(args.cfg_file)
         print ("2.   ==============>")
     if args.opts is not None:
+        print ("3.   ==============>")
         merge_cfg_from_list(args.opts)
+    print ("4.   ==============>")
     assert_and_infer_cfg()
     # logger.info('Training with config:')
     # logger.info(pprint.pformat(cfg))
