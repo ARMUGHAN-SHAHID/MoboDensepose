@@ -96,7 +96,7 @@ def main():
     )
 
     blob_names = roi_data_minibatch.get_minibatch_blob_names(is_training=True)
-    print blob_names
+    print (blob_names)
 
 
 if __name__ == '__main__':
