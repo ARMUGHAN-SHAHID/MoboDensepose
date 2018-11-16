@@ -104,7 +104,7 @@ def main():
     )
     print (type(roidb))
     print (len(roidb))
-    for i in range(20)
+    for i in range(20):
     	print (roidb[i]['boxes'].shape)
     print ("8.   ==============>")
     # blob_names = roi_data_minibatch.get_minibatch_blob_names(is_training=True)
