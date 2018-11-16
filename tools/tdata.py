@@ -102,7 +102,9 @@ def main():
     roidb = combined_roidb_for_training(
         cfg.TRAIN.DATASETS, cfg.TRAIN.PROPOSAL_FILES
     )
-    print (roidb.shape)
+    print (type(roidb))
+    print (len(roidb))
+    print (roidb[0]['boxes'].shape)
     print ("8.   ==============>")
     # blob_names = roi_data_minibatch.get_minibatch_blob_names(is_training=True)
     # print (blob_names)
