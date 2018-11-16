@@ -79,6 +79,7 @@ def main():
         merge_cfg_from_list(args.opts)
     print ("4.   ==============>")
     assert_and_infer_cfg()
+    print ("5.   ==============>")
     # logger.info('Training with config:')
     # logger.info(pprint.pformat(cfg))
     # Note that while we set the numpy random seed network training will not be
@@ -93,12 +94,13 @@ def main():
     # if not args.skip_test:
     #     test_model(checkpoints['final'], args.multi_gpu_testing, args.opts)
 
-
+    print ("6.   ==============>")
     output_dir = get_output_dir(cfg.TRAIN.DATASETS, training=True)
+    print ("7.   ==============>")
     roidb = combined_roidb_for_training(
         cfg.TRAIN.DATASETS, cfg.TRAIN.PROPOSAL_FILES
     )
-
+    print ("8.   ==============>")
     blob_names = roi_data_minibatch.get_minibatch_blob_names(is_training=True)
     print (blob_names)
 
