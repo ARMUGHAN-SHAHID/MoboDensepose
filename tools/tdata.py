@@ -65,8 +65,8 @@ def main():
     #     ['caffe2', '--caffe2_log_level=0', '--caffe2_gpu_memory_tracking=1']
     # )
     # Set up logging and load config options
-    # logger = setup_logging(__name__)
-    # logging.getLogger('detectron.roi_data.loader').setLevel(logging.INFO)
+    logger = setup_logging(__name__)
+    logging.getLogger('detectron.roi_data.loader').setLevel(logging.INFO)
     args = parse_args()
     logger.info('Called with args:')
     logger.info(args)
