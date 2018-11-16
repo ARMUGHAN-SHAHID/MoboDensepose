@@ -82,7 +82,7 @@ __C.TRAIN.MAX_SIZE = 1000
 
 # Images *per GPU* in the training minibatch
 # Total images per minibatch = TRAIN.IMS_PER_BATCH * NUM_GPUS
-__C.TRAIN.IMS_PER_BATCH = 2
+__C.TRAIN.IMS_PER_BATCH = 4
 
 # RoI minibatch size *per image* (number of regions of interest [ROIs])
 # Total number of RoIs per training minibatch =
@@ -102,7 +102,7 @@ __C.TRAIN.BG_THRESH_HI = 0.5
 __C.TRAIN.BG_THRESH_LO = 0.0
 
 # Use horizontally-flipped images during training?
-__C.TRAIN.USE_FLIPPED = True
+__C.TRAIN.USE_FLIPPED = False#True
 
 # Overlap required between an RoI and a ground-truth box in order for that
 # (RoI, gt box) pair to be used as a bounding-box regression training example
@@ -190,7 +190,7 @@ __C.DATA_LOADER = AttrDict()
 # Number of Python threads to use for the data loader (warning: using too many
 # threads can cause GIL-based interference with Python Ops leading to *slower*
 # training; 4 seems to be the sweet spot in our experience)
-__C.DATA_LOADER.NUM_THREADS = 4
+__C.DATA_LOADER.NUM_THREADS = 6
 
 # Size of the shared minibatch queue
 __C.DATA_LOADER.MINIBATCH_QUEUE_SIZE = 64
