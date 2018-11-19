@@ -243,7 +243,9 @@ def basic_bn_stem(model, data, **kwargs):
     """
 
     dim = 64
-    p = model.Conv(data, 'conv1', 3, dim, 7, pad=3, stride=2, no_bias=1)
+    p = model.Conv(data, 'conv1', 3, dim, 7, pad=3, stride=2, no_bias=1,
+        weight_init=(cfg.BODY_UV_RCNN.CONV_INIT, {'std': 0.01}),
+        bias_init=('ConstantFill', {'value': 0.}))
     p = model.AffineChannel(p, 'res_conv1_bn', dim=dim, inplace=True)
     p = model.Relu(p, p)
     p = model.MaxPool(p, 'pool1', kernel=3, pad=1, stride=2)
@@ -292,7 +294,9 @@ def bottleneck_transformation(
         kernel=1,
         stride=str1x1,
         pad=0,
-        inplace=True
+        inplace=True,
+        weight_init=(cfg.BODY_UV_RCNN.CONV_INIT, {'std': 0.01}),
+        bias_init=('ConstantFill', {'value': 0.})
     )
     cur = model.Relu(cur, cur)
 
@@ -310,7 +314,9 @@ def bottleneck_transformation(
             pad=1 * dilation,
             dilation=dilation,
             group=group,
-            inplace=True
+            inplace=True,
+            weight_init=(cfg.BODY_UV_RCNN.CONV_INIT, {'std': 0.01}),
+            bias_init=('ConstantFill', {'value': 0.})
         )
 
        
@@ -326,7 +332,9 @@ def bottleneck_transformation(
             pad=1 * dilation,
             group=group, 
             dilation=dilation,
-            inplace=True
+            inplace=True,
+            weight_init=(cfg.BODY_UV_RCNN.CONV_INIT, {'std': 0.01}),
+            bias_init=('ConstantFill', {'value': 0.})
         )
     #changed
     cur = model.Relu(cur, cur)
@@ -342,7 +350,9 @@ def bottleneck_transformation(
         kernel=1,
         stride=1,
         pad=0,
-        inplace=False
+        inplace=False,
+        weight_init=(cfg.BODY_UV_RCNN.CONV_INIT, {'std': 0.01}),
+        bias_init=('ConstantFill', {'value': 0.})
     )
     return cur
 
