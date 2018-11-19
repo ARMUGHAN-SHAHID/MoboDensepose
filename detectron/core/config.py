@@ -934,6 +934,7 @@ __C.RESNETS.SHORTCUT_FUNC = b'basic_bn_shortcut'
 __C.RESNETS.RES5_DILATION = 1
 
 __C.RESNETS.USE_CONV_DS = False #changed
+__C.RESNETS.CONV_INIT=XavierFill
 # ---------------------------------------------------------------------------- #
 # GroupNorm options
 # ---------------------------------------------------------------------------- #
