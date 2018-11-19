@@ -144,6 +144,7 @@ def compute_bbox_regression_targets(entry):
     overlaps = entry['max_overlaps']
     labels = entry['max_classes']
     gt_inds = np.where((entry['gt_classes'] > 0) & (entry['is_crowd'] == 0))[0]
+    print (len(gt_inds))
     # Targets has format (class, tx, ty, tw, th)
     targets = np.zeros((rois.shape[0], 5), dtype=np.float32)
     if len(gt_inds) == 0:
