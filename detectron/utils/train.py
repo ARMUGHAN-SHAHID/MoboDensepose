@@ -126,7 +126,7 @@ def create_model():
         optimize_memory(model)
     # Performs random weight initialization as defined by the model
     # workspace.RunNetOnce(model.param_init_net)
-    workspace.RunNetOnce(model.param_init_net.XavierFill)
+    workspace.RunNetOnce(model.XavierInit)
     return model, weights_file, start_iter, checkpoints, output_dir
 
 
