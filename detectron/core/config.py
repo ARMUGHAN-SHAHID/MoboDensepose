@@ -1129,7 +1129,7 @@ def cache_cfg_urls():
     __C.TEST.WEIGHTS = cache_url(__C.TEST.WEIGHTS, __C.DOWNLOAD_CACHE)
     __C.TRAIN.PROPOSAL_FILES = tuple(
         cache_url(f, __C.DOWNLOAD_CACHE) for f in __C.TRAIN.PROPOSAL_FILES
-    )MRCNN.MASK_HEAD_NAME
+    )
     __C.TEST.PROPOSAL_FILES = tuple(
         cache_url(f, __C.DOWNLOAD_CACHE) for f in __C.TEST.PROPOSAL_FILES
     )
