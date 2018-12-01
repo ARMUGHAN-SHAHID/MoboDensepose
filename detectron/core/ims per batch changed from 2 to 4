@@ -1,0 +1,4 @@
+ims per batch changed from 2 to 4
+TRAIN.USE_FLIPPED 
+DATA_LOADER.NUM_THREADS
+rpn stride dekhna

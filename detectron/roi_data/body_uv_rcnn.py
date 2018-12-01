@@ -83,9 +83,9 @@ def add_body_uv_rcnn_blobs(blobs, sampled_boxes, roidb, im_scale, batch_idx):
             boxes_from_polys.astype(np.float32, copy=False))
         fg_polys_inds = np.argmax(overlaps_bbfg_bbpolys, axis=1)
 
-        for i in range(rois_fg.shape[0]):
+        for i in range(rois_fg.shape[0]):#for all foreground proposals(rois)
             #
-            fg_polys_ind = polys_gt_inds[ fg_polys_inds[i] ]
+            fg_polys_ind = polys_gt_inds[ fg_polys_inds[i] ]#grount truth box index
             #
             Ilabel = segm_utils.GetDensePoseMask( roidb['dp_masks'][ fg_polys_ind ] )
             #
