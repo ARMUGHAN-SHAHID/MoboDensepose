@@ -103,48 +103,51 @@ def main(args):
     im_list=[full_file_path]
     while True:
         time.sleep(0.5)
-
-        for i, im_name in enumerate(im_list):
-            if not os.path.isfile(full_file_path):
-                continue
-            print ("file found.==> running inference\n")
-            out_name = os.path.join(
-                directory, '{}'.format(os.path.basename(im_name) + '.pdf')
-            )
-            logger.info('Processing {} -> {}'.format(im_name, out_name))
-            im = cv2.imread(im_name)
-            timers = defaultdict(Timer)
-            t = time.time()
-            with c2_utils.NamedCudaScope(0):
-                cls_boxes, cls_segms, cls_keyps, cls_bodys = infer_engine.im_detect_all(
-                    model, im, None, timers=timers
+        try:
+            for i, im_name in enumerate(im_list):
+                if not os.path.isfile(full_file_path):
+                    continue
+                print ("file found.==> running inference\n")
+                out_name = os.path.join(
+                    directory, '{}'.format(os.path.basename(im_name) + '.pdf')
                 )
-            logger.info('Inference time: {:.3f}s'.format(time.time() - t))
-            for k, v in timers.items():
-                logger.info(' | {}: {:.3f}s'.format(k, v.average_time))
-            if i == 0:
-                logger.info(
-                    ' \ Note: inference on the first image will be slower than the '
-                    'rest (caches and auto-tuning need to warm up)'
-                )
+                logger.info('Processing {} -> {}'.format(im_name, out_name))
+                im = cv2.imread(im_name)
+                timers = defaultdict(Timer)
+                t = time.time()
+                with c2_utils.NamedCudaScope(0):
+                    cls_boxes, cls_segms, cls_keyps, cls_bodys = infer_engine.im_detect_all(
+                        model, im, None, timers=timers
+                    )
+                logger.info('Inference time: {:.3f}s'.format(time.time() - t))
+                for k, v in timers.items():
+                    logger.info(' | {}: {:.3f}s'.format(k, v.average_time))
+                if i == 0:
+                    logger.info(
+                        ' \ Note: inference on the first image will be slower than the '
+                        'rest (caches and auto-tuning need to warm up)'
+                    )
 
-            vis_utils.vis_one_image(
-                im[:, :, ::-1],  # BGR -> RGB for visualization
-                im_name,
-                directory,
-                cls_boxes,
-                cls_segms,
-                cls_keyps,
-                cls_bodys,
-                dataset=dummy_coco_dataset,
-                box_alpha=0.3,
-                show_class=True,
-                thresh=0.7,
-                kp_thresh=2
-            )
-            print ("removing image")
-            a=os.system("rm {}".format(im_name))
-            print (a)
+                vis_utils.vis_one_image(
+                    im[:, :, ::-1],  # BGR -> RGB for visualization
+                    im_name,
+                    directory,
+                    cls_boxes,
+                    cls_segms,
+                    cls_keyps,
+                    cls_bodys,
+                    dataset=dummy_coco_dataset,
+                    box_alpha=0.3,
+                    show_class=True,
+                    thresh=0.7,
+                    kp_thresh=2
+                )
+                print ("removing image")
+                a=os.system("rm {}".format(im_name))
+                print (a)
+            except:
+                print ("trying again\n")
+                pass
 
 
 if __name__ == '__main__':
