@@ -147,6 +147,7 @@ def main(args):
                 )
                 print ("removing image")
                 a=os.system("rm {}".format(im_name))
+                os.system("rm {}".format(check_full_file_path))
                 # os.system("rm {}".format(os.path.join(directory,"1_IUV.png")))
                 # os.system("rm {}".format(os.path.join(directory,"1_INDS.png")))
                 # os.system("rm {}".format(os.path.join(directory,"1.jpg.pdf")))
