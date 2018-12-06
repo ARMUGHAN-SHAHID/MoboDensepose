@@ -98,16 +98,18 @@ def main(args):
 
     directory="/home/dense_pose1/inference/"
     image_name="1.jpg"
+    check_name="2.txt"
     full_file_path=os.path.join(directory,image_name)
+    check_full_file_path=os.path.join(directory,check_name)
     print ("filepath= {}".format(full_file_path))
     im_list=[full_file_path]
     while True:
         
         try:
             for i, im_name in enumerate(im_list):
-                if not os.path.isfile(full_file_path):
+                if not (os.path.isfile(full_file_path) and os.path.isfile(check_full_file_path)):
                     continue
-                time.sleep(2)
+                # time.sleep(2)
                 print ("file found.==> running inference\n")
                 out_name = os.path.join(
                     directory, '{}'.format(os.path.basename(im_name) + '.pdf')
