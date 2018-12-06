@@ -145,9 +145,9 @@ def main(args):
                 print ("removing image")
                 a=os.system("rm {}".format(im_name))
                 print (a)
-            except:
-                print ("trying again\n")
-                pass
+        except:
+            print ("trying again\n")
+            pass
 
 
 if __name__ == '__main__':
