@@ -96,7 +96,7 @@ def main(args):
     # else:
     #     im_list = [args.im_or_folder]
 
-    directory="/home/denseinference/"
+    directory="/home/dense_pose1/inference/"
     image_name="1.jpg"
     full_file_path=os.path.join(directory,image_name)
     print ("filepath= {}".format(full_file_path))
